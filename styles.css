@@ -80,11 +80,19 @@ body {
 
 /* Hero Section */
 /* Hero Section */
+/* Hero Section */
 header.hero {
-    background: linear-gradient(135deg, rgba(30, 144, 255, 0.8), rgba(0, 191, 255, 0.8)), url('background.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: 
+        linear-gradient(-45deg, 
+            rgba(30, 144, 255, 0.7), 
+            rgba(0, 191, 255, 0.7), 
+            rgba(65, 105, 225, 0.7), 
+            rgba(0, 0, 205, 0.7)
+        ),
+        url('background.jpeg');
+    background-size: 400% 400%, cover;
+    background-position: 0% 50%, center;
+    animation: gradientBG 15s ease infinite;
     color: #fff;
     height: 100vh;
     display: flex;
@@ -95,6 +103,8 @@ header.hero {
     position: relative;
     overflow: hidden;
 }
+
+
 
 @media (max-aspect-ratio: 730/450) {
     header.hero {
@@ -107,6 +117,20 @@ header.hero {
         background-size: 100% auto;
     }
 }
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%, center;
+    }
+    50% {
+        background-position: 100% 50%, center;
+    }
+    100% {
+        background-position: 0% 50%, center;
+    }
+}
+
+
+
 
 /* ... rest of the hero styles ... */
 
