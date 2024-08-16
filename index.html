@@ -8,11 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        #container {
-            text-align: left;
+            #container {
+            text-align: center;
             font-size: 24px;
         }
-
         #changing-text {
             font-weight: bold;
             color: #ffffff;
@@ -22,6 +21,7 @@
             overflow: hidden;
             animation: blink-caret 0.75s step-end infinite;
         }
+
         @keyframes blink-caret {
             from, to { border-color: transparent }
             50% { border-color: #000000; }
@@ -38,7 +38,7 @@
         <h1>Programme de Formation de <br>la filière ICSD</h1>
         <p>Explorez les cours et semestres offerts par la filiere ICSD.</p>
         <div id="container">
-            <p>Devenez ingénieur en <span id="changing-text"></span></p>
+            <p id="text-container">Devenez ingénieur en <span id="changing-text"></span></p>
         </div>
         <div id="particles-js"></div>
     </header>
@@ -425,9 +425,18 @@
             setTimeout(type, typeSpeed);
         }
 
+        function applyLineBreak() {
+            if (window.innerWidth <= 600) {
+                document.getElementById('text-container').innerHTML = 'Devenez ingénieur en<br><span id="changing-text"></span>';
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            applyLineBreak(); // Apply line break on load if necessary
             setTimeout(type, newTextDelay);
         });
+
+        window.addEventListener('resize', applyLineBreak); // Re-apply line break on window resize
     </script>
 </body>
 
