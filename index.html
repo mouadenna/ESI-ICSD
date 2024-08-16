@@ -7,6 +7,26 @@
     <title>Programme de Formation</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        #container {
+            text-align: left;
+            font-size: 24px;
+        }
+
+        #changing-text {
+            font-weight: bold;
+            color: #ffffff;
+            border-right: 2px solid #ffffff;
+            padding-right: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #000000; }
+        }
+    </style>
 </head>
 
 <body>
@@ -17,13 +37,9 @@
     <header class="hero">
         <h1>Programme de Formation de <br>la filière ICSD</h1>
         <p>Explorez les cours et semestres offerts par la filiere ICSD.</p>
-        <div class="rotating-text">
-            <span>Technologies</span>
-            <span>Data Science</span>
-            <span>Programming</span>
-            <span>Networks</span>
-            <span>Innovation</span>
-          </div>
+        <div id="container">
+            <p>Devenez ingénieur en <span id="changing-text"></span></p>
+        </div>
         <div id="particles-js"></div>
     </header>
 
@@ -366,6 +382,53 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        const jobs = [
+            "Big Data",
+            "Machine Learning",
+            "Deep Learning",
+            "Business Intelligence",
+            "Cloud Computing",
+            "Computer Vision",
+            "Data Analysis",
+            "Data Science",
+            "Data Architecture"
+        ];
+
+        let currentIndex = 0;
+        let isDeleting = false;
+        let text = '';
+        let typingSpeed = 100;
+        let erasingSpeed = 50;
+        let newTextDelay = 2000;
+
+        function type() {
+            const currentJob = jobs[currentIndex];
+            if (isDeleting) {
+                text = currentJob.substring(0, text.length - 1);
+            } else {
+                text = currentJob.substring(0, text.length + 1);
+            }
+
+            document.getElementById('changing-text').textContent = text;
+
+            let typeSpeed = isDeleting ? erasingSpeed : typingSpeed;
+
+            if (!isDeleting && text === currentJob) {
+                typeSpeed = newTextDelay;
+                isDeleting = true;
+            } else if (isDeleting && text === '') {
+                isDeleting = false;
+                currentIndex = (currentIndex + 1) % jobs.length;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(type, newTextDelay);
+        });
+    </script>
 </body>
 
 </html>
